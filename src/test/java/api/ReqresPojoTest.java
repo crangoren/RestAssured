@@ -22,7 +22,7 @@ public class ReqresPojoTest {
 
     /**
      * Get users list from 2nd page.
-     * Make sure that users avatar name contains id,
+     * Make sure that users avatar name starts with user id,
      * and users email ends with "@reqres.in"
      */
 
