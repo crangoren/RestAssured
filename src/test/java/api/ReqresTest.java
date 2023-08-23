@@ -14,10 +14,12 @@ public class ReqresTest {
 
     @Test
     public void checkAvatarAndIdTest() {
+
+        Specifications.installSpec(Specifications.requestSpecification(MAIN_URL), Specifications.responseSpecOk200());
+
         List<UserData> userData = given()
                 .when()
-                .contentType(ContentType.JSON)
-                .get(MAIN_URL + "/api/users?page=2")
+                .get("/api/users?page=2")
                 .then()
                 .log()
                 .all()
@@ -25,7 +27,7 @@ public class ReqresTest {
 
         userData.forEach(u -> Assert.assertTrue(u.getAvatar().contains(u.getId().toString())));
 
-        Assert.assertTrue(userData.stream().allMatch(u -> u.getEmail().endsWith("reqres.in")));
+        Assert.assertTrue(userData.stream().allMatch(u -> u.getEmail().endsWith("@reqres.in")));
 
         List<String> avatars = userData.stream().map(UserData::getAvatar).collect(Collectors.toList());
         List<String> id = userData.stream().map(u -> u.getId().toString()).collect(Collectors.toList());
