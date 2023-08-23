@@ -1,4 +1,4 @@
-package api;
+package api.time_compairing;
 
 import lombok.Getter;
 

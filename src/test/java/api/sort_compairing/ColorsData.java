@@ -1,4 +1,4 @@
-package api;
+package api.sort_compairing;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

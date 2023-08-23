@@ -1,17 +1,30 @@
 package api;
 
+import api.sort_compairing.ColorsData;
+import api.registration.Register;
+import api.registration.SuccessReg;
+import api.registration.UnSuccessReg;
+import api.registration.UserData;
+import api.utils.Specification;
+import api.time_compairing.UserTime;
+import api.time_compairing.UserTimeResponse;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.Clock;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static api.Constants.MAIN_URL;
+import static api.utils.Constants.MAIN_URL;
 import static io.restassured.RestAssured.given;
 
-public class ReqresTest {
+public class ReqresPojoTest {
+
+    /**
+     * Get users list from 2nd page.
+     * Make sure that users avatar name contains id,
+     * and users email ends with "@reqres.in"
+     */
 
     @Test
     public void checkAvatarAndIdTest() {
@@ -38,6 +51,11 @@ public class ReqresTest {
         }
     }
 
+    /**
+     * Check registration:
+     *  1. successful registration with status code
+     *  2. unsuccessful registration with status code
+     */
     @Test
     public void successRegisterTest() {
         Specification.installSpec(Specification.requestSpecification(MAIN_URL), Specification.responseSpecOk200());
@@ -79,6 +97,10 @@ public class ReqresTest {
         Assert.assertEquals("Missing password", unSuccessReg.getError());
     }
 
+    /**
+     * Get list of resources and make sure that it sorted by year (asc)
+     */
+
     @Test
     public void sortedYearTest(){
         Specification.installSpec(Specification.requestSpecification(MAIN_URL), Specification.responseSpecOk200());
@@ -96,6 +118,10 @@ public class ReqresTest {
 
     }
 
+    /**
+     * Try to delete user with id=2 and compare status code
+     */
+
     @Test
     public void deleteUserTest(){
         Specification.installSpec(Specification.requestSpecification(MAIN_URL), Specification.responseSpecUnique(204));
@@ -105,6 +131,10 @@ public class ReqresTest {
                 .delete("api/users/2")
                 .then().log().all();
     }
+
+    /**
+     * Try to update user data and compare dates
+     */
 
     @Test
     public void timeTest() {

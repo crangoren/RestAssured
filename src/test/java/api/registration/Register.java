@@ -1,4 +1,4 @@
-package api;
+package api.registration;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
