@@ -7,7 +7,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-public class Specifications {
+public class Specification {
 
     public static RequestSpecification requestSpecification(String url) {
         return new RequestSpecBuilder()
@@ -25,6 +25,12 @@ public class Specifications {
     public static ResponseSpecification responseSpecError400() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(400)
+                .build();
+    }
+
+    public static ResponseSpecification responseSpecUnique(int status) {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(status)
                 .build();
     }
 
