@@ -25,7 +25,7 @@ public class ReqresNoPojoClass  {
      */
 
     @Test
-    public void checkAvatarsNoPojoTest() {
+    public void checkAvatarsAndEmailNoPojoTest() {
         Specification.installSpec(Specification.requestSpecification(MAIN_URL), Specification.responseSpecOk200());
         Response response = given()
                 .get("/api/users?page=2")
